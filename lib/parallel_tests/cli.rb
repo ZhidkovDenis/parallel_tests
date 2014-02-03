@@ -47,7 +47,7 @@ module ParallelTests
           end
         end
 
-        report_results(test_results)
+        report_results(test_results) if options[:with_summary]
       end
 
       abort final_fail_message if any_test_failed?(test_results)
@@ -143,6 +143,7 @@ TEXT
         opts.on("--nice", "execute test commands with low priority.") { options[:nice] = true }
         opts.on("-v", "--version", "Show Version") { puts ParallelTests::VERSION; exit }
         opts.on("-h", "--help", "Show this.") { puts opts; exit }
+        opts.on("--with-summary", "Calculate test results summary report") { options[:with_summary] = true  }
       end.parse!(argv)
 
       if options[:count] == 0
